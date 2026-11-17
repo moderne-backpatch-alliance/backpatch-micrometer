@@ -1,0 +1,21 @@
+schema: osera-patch-evidence/0.1.0
+producer: moderne
+release: 1.9.17.1-backpatch-00001
+baseline: v1.9.17+backpatch.baseline
+fixes:
+  - cve: CVE-2026-40984
+    upstream_fix_url: https://github.com/micrometer-metrics/micrometer/commit/36da131525228188a36779a28471a76c79213dd4
+    advisory_url: https://nvd.nist.gov/vuln/detail/CVE-2026-40984
+    patch_commit_url: https://github.com/moderne-backpatch-alliance/backpatch-micrometer/commit/bb3b4ce
+    basis: adapted
+    artifacts:
+      - io.micrometer:micrometer-core
+    note: New in this release; ported onto 1.9.17; fixed at 1.9.17.1-backpatch-00001 (backpatch-micrometer@bb3b4ce).
+tests:
+  commit: bb3b4ce1135339412044c63723180133bbabf786
+  command: gradlew --no-parallel :micrometer-core:test :micrometer-test:test --continue
+  runtime: openjdk version 17.0.16 2025-07-15 LTS, Gradle wrapper
+  report: micrometer-core-1.9.17.1-backpatch-00001-tests.zip
+  report_sha256: 9fbb866e91dd5bbd4dd5da0dd00bd1a2a94bc2ac4d5d9d17c6ffefd752e57021
+  result: pass
+  note: 929 tests at the patch commit, 22 of them skipped by the suite, 0 failed, 0 errors. The suite ran on Zulu 17.0.16, as the build first ran it; the published jar was built on Temurin 20.0.2, the JDK Central's 1.9.17 jar names, which rebuilt that jar byte for byte.
